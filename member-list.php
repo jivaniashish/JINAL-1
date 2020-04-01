@@ -6,10 +6,16 @@
 </head>
 
 <body>
+	<?php
+	require_once ('head.php');
+	?>
+	
 	<h1> List of Registered Users </h1>
 	
 	<?php
-	$search=null;
+	
+	
+	/*$search=null;
 	
 	if(!empty($_GET['search']))
 	{
@@ -20,19 +26,23 @@
             echo '<a href="register.php">Add a New Member</a>';
         }
 	
+	<aside>
 		<form method="get" action="member-list.php">
-            <input name="search"  placeholder="Please Search here"
-                   value="<?php echo $search; ?>" />
-            <button>Search</button>
-        </form>
-			
+			<fieldset class="form-group">
+            	<input name="username" id="username" type="email" placeholder="Please Search username here" 
+				?>value=<?php "echo $search;"/>
+        	</fieldset>
+		</form>
+		<button> Search </button>
+		</aside>
+	*/	
 		//connect
     require_once 'db.php';
 
     //SQL Query to selects data from the users database 
     $query = "SELECT * FROM users";
 
-    // checking for the string in in the search bar
+    /*// checking for the string in in the search bar
     $split = null; 
 	// splits the string into letters
 
@@ -65,63 +75,55 @@
         }
     }
 
-    // 3. Create a Command variable $cmd then use it to run the SQL Query. Modified in Week 11 to pass wordList array for search
+    */// 3. Create a Command variable $cmd then use it to run the SQL Query. Modified in Week 11 to pass wordList array for search
     $cmd = $db->prepare($query);
-    $cmd->execute($split);
+    $cmd->execute();
 
     // 4. Use the fetchAll() method of the PDO Command variable to store the data into a variable called $persons.  See  for details.
     $member = $cmd->fetchAll();
 
-    $counted = $cmd->rowCount();
+/*    $counted = $cmd->rowCount();
 
     echo "<h5> found Members $counted</h5>";
-
+*/
     // 4a. Create a grid with a header row
     echo '<table class="sortable">
 		
 			<thead>
-					<th>USERNAME</th>
-					<th>EDIT</th>
-					<th>DELETE</th>
+					<th>Email id</th>
+					<th>NAME</th>
+					<th>Nickname</th>
+					<th>Phone no.</th>
 			</thead>';
 
     // foreach iterates the data and displays it
     foreach ($member as $value)
 	{
         // could use this but it's unclear and error prone: echo $value[1];
-        echo '<tr>';
-
-		//session is still running
-        if (!empty($_SESSION['userId'])) {
-            echo '<td><a href="artist.php?artistId=' . $value['artistId'] . '">' . $value['name'] . '</a></td>';
-        }
-        else {
-            echo '<td>' . $value['name'] . '</td>';
-        }
-
-        echo '<td>' . $value['yearFounded'] . '</td>
-            <td>' . '<a href="' . $value['website'] . '" target="_new">' . $value['website'] . '</a></td>';
-
-        if (!empty($value['photo'])) 
-		{
-            echo '<td><img src="img/artists/' . $value['photo'] . '" alt="Artist Photo" class="thumb" />';
-        }
+       
+		echo "<tr>";
+                echo"<td>" . $value['username'] . "</td>";
+				echo"<td>" . $value['name'] . "</td>";
+				echo"<td>" . $value['nickname'] . "</td>";
+				echo"<td>" . $value['phoneno'] . "</td>";
+            echo "</tr>";
+	}
+	
+	//edit and delete options to authenticated users
+	if(!empty($_SESSION['userId']))
+	{
+		echo'<tr>';
 		
-        else
-		{
-            echo '<td></td>';
-        }
-
-        // only show delete to authenticated users
-        if (!empty($_SESSION['userId'])) {
-            echo '<td><a href="delete-artist.php?artistId=' . $value['artistId'] . '" class="btn btn-danger"
-                onclick="return confirmDelete();">Delete</a></td>';
-        }
-
-        echo '</tr>';
-    }
-
-    // 5a. End the HTML table
+		echo'<td> 
+		
+					<button><a href="edit.php">Edit</a></button>
+					<button><a href="delete.php">Delete</a></button>
+					
+					</td>';
+		
+		echo '</tr>';
+	}
+    // table end
     echo '</table>';
 
     // 6. Disconnect from the database
