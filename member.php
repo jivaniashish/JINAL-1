@@ -32,7 +32,7 @@ if ($ok) {
     $password = password_hash($password, PASSWORD_DEFAULT);
     //echo $password;
 
-    try {
+   /* try {*/
 			//connect
 			require_once 'db.php';
 
@@ -58,28 +58,20 @@ if ($ok) {
 			$cmd->execute();
         }
 
-//set up sql insert to users table
-$sql="INSERT INTO users(username,password) VALUES (:username,:password)";
-$cmd=$db->prepare($sql);
 
-
-//bind parameters and execute
-$cmd->bindParam(':username', $username, PDO::PARAM_STR, 50);
-    $cmd->bindParam(':password', $password, PDO::PARAM_STR, 255);
-    $cmd->execute();
 
 //disconnect and redirect
 $db = null;
 
 // redirect to login page
-        header('location:login.php');
- }
+ //       header('location:login.php');
+// }
 
-catch (Exception $e) {
+/*catch (Exception $e) {
         header('location:error.php');
         exit();
     }
-}
+}*/
 
 require_once 'foot.php';
 ?>
