@@ -116,8 +116,8 @@
 		
 		echo'<td> 
 		
-					<button><a href="edit.php">Edit</a></button>
-					<button><a href="delete.php">Delete</a></button>
+					<button><a href="pedit.php">Edit</a></button>
+					<button><a href="pdelete.php">Delete</a></button>
 					
 					</td>';
 		

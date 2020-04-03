@@ -19,7 +19,7 @@
 	$sql = "DELETE FROM users
 								WHERE userId = :userId";
 	
-	// pass the clubId parameter to the command
+	// pass the userId parameter to the command
 	$cmd = $db->prepare($sql);
 	$cmd->bindParam(':userId', $userId, PDO::PARAM_INT);
 	

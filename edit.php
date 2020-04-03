@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Edit Page</title>
 </head>
-	<body>
+	
 	<?php
 		
 		 require_once 'head.php';
@@ -63,6 +63,9 @@ if ($ok == true)
 	
 		 echo 'Edited';	
 }
+	else
+		$db=null;
+}
 	
 	//if conditions not satisfied
 	else
@@ -72,9 +75,8 @@ if ($ok == true)
 	
 	 require_once 'foot.php';
 ?>
-	
-<a href="member-list.php"> Show records </a>
-
-
+	<body>
+		
+		<a href="member-list.php"> Show records </a>
 </body>
 </html>
