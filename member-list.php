@@ -7,7 +7,8 @@
 
 <body>
 	<?php
-	require_once ('head.php');
+	//This file is not available in git so not needed to include
+	//require_once ('head.php');
 	?>
 	
 	<h1> List of Registered Users </h1>
@@ -30,13 +31,15 @@
 		<form method="get" action="member-list.php">
 			<fieldset class="form-group">
             	<input name="username" id="username" type="email" placeholder="Please Search username here" 
-				?>value=<?php "echo $search;"/>
+				value="<?php echo $search;?>" />
         	</fieldset>
 		</form>
 		<button> Search </button>
 		</aside>
-	*/	
-		//connect
+		
+     */
+	 
+	//connect
     require_once 'db.php';
 
     //SQL Query to selects data from the users database 
@@ -82,10 +85,10 @@
     // 4. Use the fetchAll() method of the PDO Command variable to store the data into a variable called $persons.  See  for details.
     $member = $cmd->fetchAll();
 
-/*    $counted = $cmd->rowCount();
+    $counted = $cmd->rowCount();
 
     echo "<h5> found Members $counted</h5>";
-*/
+
     // 4a. Create a grid with a header row
     echo '<table class="sortable">
 		
